@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Mew Game</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Teleport</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Teleporting Image</title>
+    <style>
+        #mew {
+            position: absolute;
+            width: 269px; 
+            height: auto;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <main>
-        <img src="Mew.png" id="teleportImage" alt="Cat" width=300px height=200px>
-        <script src="index.js"></script>
-    </main>
+    <img id="mew" src="Mew.png" alt="Mew">
+
+    <script>
+        const mew = document.getElementById('mew');
+
+        mew.addEventListener('click', () => {
+            const maxWidth = window.innerWidth - mew.width;
+            const maxHeight = window.innerHeight - mew.height;
+            const randomX = Math.floor(Math.random() * maxWidth);
+            const randomY = Math.floor(Math.random() * maxHeight);
+
+            mew.style.left = `${randomX}px`;
+            mew.style.top = `${randomY}px`;
+        });
+    </script>
 </body>
 </html>
-
