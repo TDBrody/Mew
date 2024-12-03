@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mew Mew</title>
+    <title>Mew Meew</title>
     <style>
         #mew {
             position: absolute;
             width: 150px;
             height: auto;
             cursor: pointer;
+            transition: all 0.5s ease;
         }
     </style>
 </head>
@@ -17,19 +18,22 @@
     <audio id="MewMewMeeew">
         <source src="MewMew.m4a" type="audio/m4a">
     </audio>
-    <img src="Mew.png" onclick="document.getElementById('MewMewMeeew').play();">
     <img id="mew" src="Mew.png" alt="Mew">
     <script>
-        const mew = document.getElementById('mew');
+        document.addEventListener('DOMContentLoaded', () => {
+            const mew = document.getElementById('mew');
+            const audio = document.getElementById('MewMewMeeew');
 
-        mew.addEventListener('click', () => {
-            const maxWidth = window.innerWidth - mew.width;
-            const maxHeight = window.innerHeight - mew.height;
-            const randomX = Math.floor(Math.random() * maxWidth);
-            const randomY = Math.floor(Math.random() * maxHeight);
+            mew.addEventListener('click', () => {
+                const maxWidth = window.innerWidth - mew.width;
+                const maxHeight = window.innerHeight - mew.height;
+                const randomX = Math.floor(Math.random() * maxWidth);
+                const randomY = Math.floor(Math.random() * maxHeight);
 
-            mew.style.left = `${randomX}px`;
-            mew.style.top = `${randomY}px`;
+                mew.style.left = `${randomX}px`;
+                mew.style.top = `${randomY}px`;
+                audio.play();
+            });
         });
     </script>
 </body>
