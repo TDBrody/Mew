@@ -46,7 +46,16 @@ body {
     </audio>
     <img id="mew" src="Mew.png" alt="Mew">
     <script>
+        
         let score = 0;
+        const scoreElement = document.getElementById('score');
+
+        function subtractScore() {
+            score -= 10;
+            scoreElement.textContent = score;
+        }
+
+        setInterval(subtractScore, 1000);
         document.addEventListener('DOMContentLoaded', () => {
             const mew = document.getElementById('mew');
             const scoreEl = document.getElementById("score");
