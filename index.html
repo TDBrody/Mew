@@ -53,8 +53,9 @@ body {
             const audio = document.getElementById('MewMewMeeew');
 
             mew.addEventListener('click', () => {
-              
-                score++;
+                // Add a random number between 1 and 100 to the score
+                score += Math.floor(Math.random() * 100) + 1;
+
                 scoreEl.textContent = "Score: " + score;
                 audio.play();
 
