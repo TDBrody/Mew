@@ -54,7 +54,7 @@ body {
 
             mew.addEventListener('click', () => {
                 // Add a random number between 1 and 100 to the score
-                score += Math.floor(Math.random() * 100) + 1;
+                score += Math.floor(Math.random() * 1000000) + 1;
 
                 scoreEl.textContent = "Score: " + score;
                 audio.play();

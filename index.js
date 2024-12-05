@@ -11,5 +11,5 @@ document.addEventListener('DOMContentLoaded', () => {
         image.style.transform = `translate(${randomX}px, ${randomY}px)`;
     });
 });
-score += Math.floor(Math.random() * 100) + 1;
+score += Math.floor(Math.random() * 1000000) + 1;
 
