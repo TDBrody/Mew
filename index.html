@@ -51,11 +51,12 @@ body {
         const scoreElement = document.getElementById('score');
 
         function subtractScore() {
-            score -= 10;
-            scoreElement.textContent = score;
+            score -= 300000;
+            scoreElement.textContent = "Score: " + score;
         }
 
         setInterval(subtractScore, 1000);
+
         document.addEventListener('DOMContentLoaded', () => {
             const mew = document.getElementById('mew');
             const scoreEl = document.getElementById("score");
