@@ -40,17 +40,22 @@ body {
 </head>
 <body>
     <a href="MEEW.html">Learn how to play</a>
+    <p id="score">Score: 0</p>
     <audio id="MewMewMeeew">
         <source src="MewMew.mp3" type="audio/mp3">
     </audio>
     <img id="mew" src="Mew.png" alt="Mew">
     <script>
+        let score = 0;
         document.addEventListener('DOMContentLoaded', () => {
             const mew = document.getElementById('mew');
+            const scoreEl = document.getElementById("score");
             const audio = document.getElementById('MewMewMeeew');
 
             mew.addEventListener('click', () => {
               
+                score++;
+                scoreEl.textContent = "Score: " + score;
                 audio.play();
 
                 const maxWidth = window.innerWidth - mew.width;
