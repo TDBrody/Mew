@@ -13,3 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 score += Math.floor(Math.random() * 1000000) + 1;
 
+if (score > 1000) {
+    document.getElementById('message').textContent = 'You Win!';
+}
