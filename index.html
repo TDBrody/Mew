@@ -57,6 +57,11 @@ body {
 
         setInterval(subtractScore, 1000);
 
+        document.getElementById('score').textContent = score;
+            if (score > 1000) {
+                document.getElementById('message').textContent = 'You Win!';
+ }
+        
         document.addEventListener('DOMContentLoaded', () => {
             const mew = document.getElementById('mew');
             const scoreEl = document.getElementById("score");
