@@ -15,9 +15,7 @@
     </style>
 </head>
 <body>
-    <h1>
-        "How to play."
-    </h1>
+    <h1>"How to play."</h1>
     <audio id="MewMewMeeew">
         <source src="MewMew.mp3" type="audio/mp3">
     </audio>
@@ -28,6 +26,9 @@
             const audio = document.getElementById('MewMewMeeew');
 
             mew.addEventListener('click', () => {
+              
+                audio.play();
+
                 const maxWidth = window.innerWidth - mew.width;
                 const maxHeight = window.innerHeight - mew.height;
                 const randomX = Math.floor(Math.random() * maxWidth);
@@ -35,7 +36,6 @@
 
                 mew.style.left = `${randomX}px`;
                 mew.style.top = `${randomY}px`;
-                audio.play();
             });
         });
     </script>
