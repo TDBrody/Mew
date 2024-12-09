@@ -1,7 +1,50 @@
-#teleportImage {
+#mew {
     position: absolute;
-    top: 50px;
-    left: 50px;
-    transition: sall 0.5s ease;
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    animation: rainbow infinite 1s;
+    animation-direction: alternate;
 }
 
+#raikou {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+    transition: all 2s ease;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+a {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+@keyframes rainbox {
+    0% {
+        filter: hue-rotate(0);
+    }
+    100% {
+        filter: hue-rotate(360);
+    }
+}

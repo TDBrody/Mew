@@ -4,39 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mew Mew</title>
-    <style>
-        #mew {
-            position: absolute;
-            width: 150px;
-            height: auto;
-            cursor: pointer;
-            transition: all 0.5s ease;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #333;
-            font-size: 24px;
-            line-height: 1.5;
-        }
-
-        a {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <a href="MEEW.html">Learn how to play</a>
@@ -45,54 +13,7 @@
         <source src="MewMew.mp3" type="audio/mp3">
     </audio>
     <img id="mew" src="Mew.png" alt="Mew">
-    <script>
-        let score = 0;
-        const scoreElement = document.getElementById('score');
-
-        function subtractScore() {
-            score -= 300000;
-            scoreElement.textContent = "Score: " + score;
-
-            // Check win condition
-            if (score > 100000000) {
-                alert('You Win!');
-            }
-        }
-
-        setInterval(subtractScore, 1000);
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const mew = document.getElementById('mew');
-            const audio = document.getElementById('MewMewMeeew');
-
-            mew.addEventListener('click', () => {
-                // Add a random number between 1 and 100 to the score
-                score += Math.floor(Math.random() * 1000000) + 1;
-
-                scoreElement.textContent = "Score: " + score;
-                audio.play();
-
-                const maxWidth = window.innerWidth - mew.offsetWidth;
-                const maxHeight = window.innerHeight - mew.offsetHeight;
-                const randomX = Math.floor(Math.random() * maxWidth);
-                const randomY = Math.floor(Math.random() * maxHeight);
-
-                mew.style.left = `${randomX}px`;
-                mew.style.top = `${randomY}px`;
-            });
-        });
-        var element = new Image;
-            var devtoolsOpen = false;
-            element.__defineGetter__("id", function() {
-                devtoolsOpen = true; // This only executes when devtools is open.
-            });
-            setInterval(function() {
-                devtoolsOpen = false;
-                console.log(element);
-                if (devtoolsOpen){
-                    alert("CHEATER");
-                }
-            }, 100);
-    </script>
+    <img id="raikou" src="Raikou.png" alt="Raikou">
+    <script src="index.js"></script>
 </body>
 </html>
