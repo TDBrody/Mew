@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mew.style.top = `${randomY}px`;
     });
      const raikou = document.getElementById('raikou');
-     //const mewAudio = document.getElementById('MewMewMeeew');
+     const raikouAudio = document.getElementById('marmar');
      mew.addEventListener('click',() => {
          addScore(-1000000, 2690000);
          mewAudio.play();
