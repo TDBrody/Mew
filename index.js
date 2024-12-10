@@ -41,9 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
          raikou.style.top = `${randomY}px`;
     });
     const tigger = document.getElementById('tigger');
+    const tiggerAudio = document.getElementById('Mwa');
     tigger.addEventListener('click',() => {
         addScore(-200000, 200000);
-        raikouAudio.play();
+        tiggerAudio.play();
         
        const maxWidth = window.innerWidth - mew.offsetWidth;
        const maxHeight = window.innerHeight - mew.offsetHeight;
@@ -53,9 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
         tigger.style.top = `${randomY}px`;
    });
     const gracie = document.getElementById('gracie');
+    const gracieAudio = document.getElementById('Barp');
     gracie.addEventListener('click',() => {
         addScore(-30000000, 10000000);
-        raikouAudio.play();
+        gracieAudio.play();
         
        const maxWidth = window.innerWidth - mew.offsetWidth;
        const maxHeight = window.innerHeight - mew.offsetHeight;
@@ -105,7 +107,7 @@ function positionImages() {
     });
 }
 
-window.onload = positionImages;
+
 window.onresize = positionImages;
 // The Dot object used to scaffold the dots
 var Dot = function() {
@@ -239,4 +241,46 @@ class Particle {
     });
   });
   
+
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        document.getElementById('popup1').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }, 10000); // 60000 milliseconds = 1 minute
+
+    setTimeout(function() {
+        document.getElementById('popup2').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }, 25000); // 120000 milliseconds = 2 minutes
+    setTimeout(function() {
+      document.getElementById('popup3').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+  }, 50000); // 120000 milliseconds = 2 minutes
+  setTimeout(function() {
+    document.getElementById('popup4').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}, 75000); // 120000 milliseconds = 2 minutes
+setTimeout(function() {
+  document.getElementById('popup5').style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+}, 100000); // 120000 milliseconds = 2 minutes
+});
+
+
+window.onload = positionImages;
+window.onresize = positionImages;
+
+// Close the first popup and overlay when the close button is clicked
+document.getElementById('popup1-close').onclick = function() {
+    document.getElementById('popup1').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+};
+
+// Close the second popup and overlay when the close button is clicked
+document.getElementById('popup2-close').onclick = function() {
+    document.getElementById('popup2').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+};
   
