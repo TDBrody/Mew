@@ -1,3 +1,4 @@
+
 let score = 0;
 const scoreElement = document.getElementById('score');
 
@@ -248,24 +249,24 @@ class Particle {
     setTimeout(function() {
         document.getElementById('popup1').style.display = 'block';
         document.getElementById('overlay').style.display = 'block';
-    }, 10000); // 60000 milliseconds = 1 minute
+    }, 60000); // 60000 milliseconds = 1 minute
 
     setTimeout(function() {
         document.getElementById('popup2').style.display = 'block';
         document.getElementById('overlay').style.display = 'block';
-    }, 25000); // 120000 milliseconds = 2 minutes
+    }, 150000); // 120000 milliseconds = 2 minutes
     setTimeout(function() {
       document.getElementById('popup3').style.display = 'block';
       document.getElementById('overlay').style.display = 'block';
-  }, 50000); // 120000 milliseconds = 2 minutes
+  }, 210000); // 120000 milliseconds = 2 minutes
   setTimeout(function() {
     document.getElementById('popup4').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
-}, 75000); // 120000 milliseconds = 2 minutes
+}, 400000); // 120000 milliseconds = 2 minutes
 setTimeout(function() {
   document.getElementById('popup5').style.display = 'block';
   document.getElementById('overlay').style.display = 'block';
-}, 100000); // 120000 milliseconds = 2 minutes
+}, 500000); // 120000 milliseconds = 2 minutes
 });
 
 
@@ -283,4 +284,96 @@ document.getElementById('popup2-close').onclick = function() {
     document.getElementById('popup2').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
 };
-  
+document.getElementById('popup3-close').onclick = function() {
+  document.getElementById('popup3').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+};
+document.getElementById('popup4-close').onclick = function() {
+  document.getElementById('popup4').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+};
+document.getElementById('popup5-close').onclick = function() {
+  document.getElementById('popup5').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+};let isActive = false;
+let cooldown = false;
+
+// Function to create particles
+function createRainbowSpeedLine() {
+    const particle = document.createElement('div');
+    particle.classList.add('speed-particle');
+
+    // Randomize position within the rectangle
+    const rect = document.getElementById('rainbow-rectangle').getBoundingClientRect();
+    const x = Math.random() * rect.width;
+    const y = Math.random() * rect.height;
+
+    particle.style.left = `${rect.left + x}px`;
+    particle.style.top = `${rect.top + y}px`;
+    document.body.appendChild(particle);
+
+    // Remove the particle after animation ends
+    particle.addEventListener('animationend', () => particle.remove());
+}
+
+// Main function to handle the event
+function triggerRainbowEvent() {
+    if (isActive || cooldown) return; // Prevent duplicate triggers
+
+    const rainbowRectangle = document.getElementById('rainbow-rectangle');
+    const donutImage = document.getElementById('donut-image');
+
+    // Activate the event
+    isActive = true;
+    cooldown = true;
+
+    // Show rectangle with animation
+    rainbowRectangle.style.display = 'block';
+    rainbowRectangle.style.animation = 'growRectangle 1s ease-out forwards, rainbowShift 3s linear infinite';
+
+    // Start particle animation
+    const particleInterval = setInterval(createRainbowSpeedLine, 100);
+
+    // Show the donut after 1 second
+    setTimeout(() => {
+        donutImage.style.display = 'block';
+        donutImage.style.animation = 'donutAppear 1s ease-out forwards';
+
+        // After 1 second, hide the donut and start clean-up
+        setTimeout(() => {
+            score += 500000; // Increment score
+            console.log(`Score: ${score}`);
+
+            // Hide the donut
+            donutImage.style.animation = 'donutFadeOut 1s ease-out forwards';
+            donutImage.addEventListener('animationend', () => {
+                donutImage.style.display = 'none';
+            });
+
+            // Shrink and hide the rectangle
+            rainbowRectangle.style.animation = 'shrinkRectangle 1s ease-in forwards';
+            setTimeout(() => {
+                rainbowRectangle.style.display = 'none';
+                clearInterval(particleInterval); // Stop particles
+                isActive = false; // Reset active state
+
+                // Start cooldown timer
+                setTimeout(() => {
+                    cooldown = false;
+                }, 10000); // 10-second cooldown
+            }, 1000); // Match shrinkRectangle duration
+        }, 1000); // Donut visibility duration
+    }, 1000); // Delay before donut appears
+}
+
+// Probability-based event triggering logic (1/60 chance per second)
+function attemptTriggerRainbowEvent() {
+    if (Math.random() < 1 / 60) { // 1/60 chance to trigger
+        triggerRainbowEvent();
+    }
+}
+
+// Example trigger loop running every second
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(attemptTriggerRainbowEvent, 1000); // Check once per second
+});

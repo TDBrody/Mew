@@ -7,9 +7,17 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+    <!-- Animation Container -->
+    <div id="animation-container">
+        <div id="rainbow-rectangle" style="display: none;">
+            <img id="donut-image" src="Donut.png" alt="Donut Blessing" style="display: none;">
+        </div>
+    </div>
+
+    <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- First Popup -->
+    <!-- Popups -->
     <div class="popup" id="popup1">
         <div class="popup-close" id="popup1-close">&times;</div>
         <div class="popup-header">Raid: Shadow Legends</div>
@@ -18,8 +26,6 @@
             <a href="https://www.raidshadowlegends.com" target="_blank">Play Now</a>
         </div>
     </div>
-
-    <!-- Second Popup -->
     <div class="popup" id="popup2">
         <div class="popup-close" id="popup2-close">&times;</div>
         <div class="popup-header">Special Offer</div>
@@ -28,34 +34,39 @@
             <a href="https://www.tcgplayer.com/search/all/product?view=grid&seller=9c1e37e7" target="_blank">Sign Up Now</a>
         </div>
     </div>
-   
-     <div class="popup" id="popup3">
+    <div class="popup" id="popup3">
         <div class="popup-close" id="popup3-close">&times;</div>
-        <div class="popup-header">Special Offer</div>
+        <div class="popup-header">Sneak Peak!</div>
         <div class="popup-content">
             <p>New exclusive trailer for National Geographic Presents: Bird!</p>
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Sign Up Now</a>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Watch Now</a>
         </div>
     </div>
     <div class="popup" id="popup4">
         <div class="popup-close" id="popup4-close">&times;</div>
-        <div class="popup-header">Special Offer</div>
+        <div class="popup-header">Watch Now</div>
         <div class="popup-content">
-            <p>The worlds BIGGEST Rose Goku Black Collection???</p>
-            <a href="https://www.youtube.com/channel/UCdiNFnKnc2Bm7hLe2UW-_vw" target="_blank">Sign Up Now</a>
+            <p>The world's BIGGEST Rose Goku Black Collection???</p>
+            <a href="https://www.youtube.com/channel/UCdiNFnKnc2Bm7hLe2UW-_vw" target="_blank">Watch Now</a>
         </div>
     </div>
     <div class="popup" id="popup5">
-        <div class="popup-close" id="popup4-close">&times;</div>
-        <div class="popup-header">Special Offer</div>
+        <div class="popup-close" id="popup5-close">&times;</div>
+        <div class="popup-header">New Article!</div>
         <div class="popup-content">
             <p>10 Strongest Dragon Ball Z Movie-Only Characters, Ranked</p>
-            <a href="https://www.msn.com/en-us/news/technology/10-strongest-dragon-ball-z-movie-only-characters-ranked/ar-AA1vy4Fm?ocid=entnewsntp&pc=U531&cvid=55fb2bfc447541478dc834b427c2a223&ei=11" target="_blank">Sign Up Now</a>
+            <a href="https://www.msn.com/en-us/news/technology/10-strongest-dragon-ball-z-movie-only-characters-ranked/ar-AA1vy4Fm" target="_blank">Read Now</a>
         </div>
     </div>
-    <a href="Notes.html"> (The Mega Update Part 2) Update 233: Patch Notes</a> <br>
+
+    <!-- Links -->
+    <a href="Notes.html">(The Rainbow Donut Update) Update 234: Patch Notes</a> <br>
     <a href="MEEW.html">Learn how to play</a>
+
+    <!-- Score -->
     <p id="score">Score: 0</p>
+
+    <!-- Audio -->
     <audio id="MewMewMeeew">
         <source src="MewMew.mp3" type="audio/mp3">
     </audio>
@@ -68,10 +79,14 @@
     <audio id="Mwa">
         <source src="ds.mp3" type="audio/mp3">
     </audio>
+
+    <!-- Images -->
     <img id="mew" class="MeowMeow" src="Mew.png" alt="Mew">
     <img id="raikou" class="MeowMeow" src="Raikou.png" alt="Raikou">
-    <img id="tigger" class="MeowMeow"  src="Tigger.png" alt="Tigger">
-    <img id="gracie" class="MeowMeow"  src="Gracie.png" alt="Gracie">
+    <img id="tigger" class="MeowMeow" src="Tigger.png" alt="Tigger">
+    <img id="gracie" class="MeowMeow" src="Gracie.png" alt="Gracie">
+
+    <!-- Script -->
     <script src="index.js"></script>
 </body>
 </html>
