@@ -378,22 +378,26 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(attemptTriggerRainbowEvent, 1000); // Check once per second
 });
 (function () {
-  let devtoolsOpen = false;
-  const threshold = 160;
   const audio = document.getElementById('alertAudio');
+  let devtoolsOpen = false;
 
   const detectDevTools = () => {
-    const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-    const heightThreshold = window.outerHeight - window.innerHeight > threshold;
-    if (widthThreshold || heightThreshold) {
-      if (!devtoolsOpen) {
+    const element = new Image();
+    Object.defineProperty(element, 'id', {
+      get: function () {
         devtoolsOpen = true;
         audio.play();
       }
-    } else {
-      devtoolsOpen = false;
-    }
+    });
+    console.log(element);
+    console.clear();
   };
 
-  setInterval(detectDevTools, 1000);
+  setInterval(() => {
+    devtoolsOpen = false;
+    detectDevTools();
+    if (devtoolsOpen) {
+      console.log('DevTools is open');
+    }
+  }, 1000);
 })();
