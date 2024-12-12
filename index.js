@@ -75,18 +75,7 @@ function addScore(min, max) {
   scoreElement.textContent = "Score: " + score;
 }
 
-var element = new Image;
-var devtoolsOpen = false;
-element.__defineGetter__("id", function () {
-  devtoolsOpen = true; // This only executes when devtools is open.
-});
-setInterval(function () {
-  devtoolsOpen = false;
-  console.log(element);
-  if (devtoolsOpen) {
-    alert("CHEATER");
-  }
-}, 100);
+
 
 function getRandomPosition(max) {
   return Math.floor(Math.random() * max);
