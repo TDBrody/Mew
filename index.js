@@ -355,38 +355,33 @@ function triggerRainbowEvent() {
   }, 1000); // Delay before donut appears
 }
 
-// Probability-based event triggering logic (1/60 chance per second)
-function attemptTriggerRainbowEvent() {
-  if (Math.random() < 1 / 60) { // 1/60 chance to trigger
-    triggerRainbowEvent();
-  }
-}
-
 const alertAudio = document.getElementById('alertAudio');
 
-// Function to detect if dev tools are open
+// A function to detect when the dev tools are opened
 function isDevToolsOpen() {
-  const threshold = 100; // Threshold for the console size (px)
+  const threshold = 100; // Pixel difference threshold
 
-  // Check if the window's inner height is larger than a certain value
+  // Check the difference between outer and inner height of the window
   return window.outerHeight - window.innerHeight > threshold;
 }
 
-// Function to trigger audio alert
+// Play the alert sound
 function playAlertAudio() {
   alertAudio.play();
 }
 
-// Listen for changes in the window size to detect dev tools opening/closing
-let devToolsOpened = false;
+// Flag to ensure the audio is triggered only once after the dev tools are detected
+let devToolsAlreadyOpened = false;
 
+// Detect when the window is resized (which happens when the dev tools open)
 window.addEventListener('resize', () => {
-  if (isDevToolsOpen() && !devToolsOpened) {
-    // If dev tools were not already detected, trigger the alert
-    devToolsOpened = true;
-    playAlertAudio();
-  } else if (!isDevToolsOpen() && devToolsOpened) {
-    // If dev tools are closed, reset the flag
-    devToolsOpened = false;
+  // We only want to check after the page has loaded (so ignore the initial page load)
+  if (document.readyState === "complete") {
+    if (isDevToolsOpen() && !devToolsAlreadyOpened) {
+      devToolsAlreadyOpened = true;  // Mark that dev tools were opened
+      playAlertAudio();  // Play the alert sound
+    } else if (!isDevToolsOpen() && devToolsAlreadyOpened) {
+      devToolsAlreadyOpened = false;  // Reset when dev tools are closed
+    }
   }
 });
