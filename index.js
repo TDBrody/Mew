@@ -357,31 +357,28 @@ function triggerRainbowEvent() {
 
 const alertAudio = document.getElementById('alertAudio');
 
-// A function to detect when the dev tools are opened
+// Function to detect when dev tools are open by comparing outer height to inner height
 function isDevToolsOpen() {
-  const threshold = 100; // Pixel difference threshold
-
-  // Check the difference between outer and inner height of the window
-  return window.outerHeight - window.innerHeight > threshold;
+  return window.outerHeight - window.innerHeight > 150; // Adjust threshold for your needs
 }
 
-// Play the alert sound
+// Play the audio alert
 function playAlertAudio() {
   alertAudio.play();
 }
 
-// Flag to ensure the audio is triggered only once after the dev tools are detected
-let devToolsAlreadyOpened = false;
+// Flag to track if the dev tools were opened
+let devToolsOpened = false;
 
-// Detect when the window is resized (which happens when the dev tools open)
+// Listen for resize events (this is triggered when the dev tools open or close)
 window.addEventListener('resize', () => {
-  // We only want to check after the page has loaded (so ignore the initial page load)
-  if (document.readyState === "complete") {
-    if (isDevToolsOpen() && !devToolsAlreadyOpened) {
-      devToolsAlreadyOpened = true;  // Mark that dev tools were opened
-      playAlertAudio();  // Play the alert sound
-    } else if (!isDevToolsOpen() && devToolsAlreadyOpened) {
-      devToolsAlreadyOpened = false;  // Reset when dev tools are closed
+  if (document.readyState === 'complete') {  // Make sure the page is loaded first
+    // Only trigger if dev tools weren't already opened
+    if (isDevToolsOpen() && !devToolsOpened) {
+      devToolsOpened = true;
+      playAlertAudio();
+    } else if (!isDevToolsOpen() && devToolsOpened) {
+      devToolsOpened = false;
     }
   }
 });
