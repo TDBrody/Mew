@@ -362,21 +362,14 @@ function attemptTriggerRainbowEvent() {
   }
 }
 
-// Example trigger loop running every second
-document.addEventListener('DOMContentLoaded', () => {
-  setInterval(attemptTriggerRainbowEvent, 1000); // Check once per second
-});
 const alertAudio = document.getElementById('alertAudio');
 
 // Function to detect if dev tools are open
 function isDevToolsOpen() {
-  const devtools = /./;
-  devtools.toString = function () {
-    return '';
-  };
+  const threshold = 100; // Threshold for the console size (px)
 
-  // Detect if the console is open by checking the function's length.
-  return devtools.toString().length === 0;
+  // Check if the window's inner height is larger than a certain value
+  return window.outerHeight - window.innerHeight > threshold;
 }
 
 // Function to trigger audio alert
@@ -384,9 +377,16 @@ function playAlertAudio() {
   alertAudio.play();
 }
 
-// Regularly check if dev tools are open
-setInterval(() => {
-  if (isDevToolsOpen()) {
+// Listen for changes in the window size to detect dev tools opening/closing
+let devToolsOpened = false;
+
+window.addEventListener('resize', () => {
+  if (isDevToolsOpen() && !devToolsOpened) {
+    // If dev tools were not already detected, trigger the alert
+    devToolsOpened = true;
     playAlertAudio();
+  } else if (!isDevToolsOpen() && devToolsOpened) {
+    // If dev tools are closed, reset the flag
+    devToolsOpened = false;
   }
-}, 1000); // check every second
+});
