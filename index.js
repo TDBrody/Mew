@@ -377,27 +377,27 @@ function attemptTriggerRainbowEvent() {
 document.addEventListener('DOMContentLoaded', () => {
   setInterval(attemptTriggerRainbowEvent, 1000); // Check once per second
 });
-(function () {
-  const audio = document.getElementById('alertAudio');
-  let devtoolsOpen = false;
+const alertAudio = document.getElementById('alertAudio');
 
-  const detectDevTools = () => {
-    const element = new Image();
-    Object.defineProperty(element, 'id', {
-      get: function () {
-        devtoolsOpen = true;
-        audio.play();
-      }
-    });
-    console.log(element);
-    console.clear();
+// Function to detect if dev tools are open
+function isDevToolsOpen() {
+  const devtools = /./;
+  devtools.toString = function () {
+    return '';
   };
 
-  setInterval(() => {
-    devtoolsOpen = false;
-    detectDevTools();
-    if (devtoolsOpen) {
-      console.log('DevTools is open');
-    }
-  }, 1000);
-})();
+  // Detect if the console is open by checking the function's length.
+  return devtools.toString().length === 0;
+}
+
+// Function to trigger audio alert
+function playAlertAudio() {
+  alertAudio.play();
+}
+
+// Regularly check if dev tools are open
+setInterval(() => {
+  if (isDevToolsOpen()) {
+    playAlertAudio();
+  }
+}, 1000); // check every second
