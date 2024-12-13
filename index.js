@@ -222,14 +222,6 @@ function createExplosion(x, y) {
 }
 
 // Add Click Event Listener to Photos
-document.querySelectorAll(".MeowMeow").forEach(photo => {
-  photo.addEventListener("click", event => {
-    const rect = photo.getBoundingClientRect();
-    const x = rect.left + rect.width / 2; // Center of the photo
-    const y = rect.top + rect.height / 2;
-    createExplosion(x, y);
-  });
-});
 
 
 
@@ -364,21 +356,83 @@ function isDevToolsOpen() {
 }
 
 // Play the audio alert
-function playAlertAudio() {
-  alertAudio.play();
+
+let curseInterval; // Variable to hold the curse interval
+
+
+document.querySelectorAll(".MeowMeow").forEach(photo => { 
+  photo.addEventListener("click", event => {
+    const rect = photo.getBoundingClientRect();
+    const x = event.clientX - rect.left; // X-coordinate relative to the image
+    const y = event.clientY - rect.top;  // Y-coordinate relative to the image
+
+    // Create a canvas for pixel data detection
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = photo.width;
+    canvas.height = photo.height;
+
+    // Draw the image on the canvas
+    ctx.drawImage(photo, 0, 0, photo.width, photo.height);
+
+    // Get pixel data
+    const pixel = ctx.getImageData(x, y, 1, 1).data;
+
+    // Check alpha value (index 3 is the alpha channel)
+    if (pixel[3] > 0) {
+      // Non-transparent part clicked
+      const xCenter = rect.left + rect.width / 2; // Center X
+      const yCenter = rect.top + rect.height / 2; // Center Y
+      createExplosion(xCenter, yCenter);
+    } else {
+      // Transparent part clicked
+      console.log('Transparent area clicked, activating curse.');
+      activateCurse();
+    }
+  });
+});
+
+// Function to activate the curse
+function activateCurse() {
+  const curseMessage = document.createElement('div');
+  curseMessage.textContent = "You were cursed by a chunky cat!";
+  curseMessage.style.position = "fixed";
+  curseMessage.style.top = "10px";
+  curseMessage.style.right = "10px";
+  curseMessage.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+  curseMessage.style.color = "white";
+  curseMessage.style.padding = "10px 20px";
+  curseMessage.style.borderRadius = "5px";
+  curseMessage.style.fontSize = "16px";
+  curseMessage.style.opacity = "0";
+  curseMessage.style.transition = "opacity 0.5s ease";
+  document.body.appendChild(curseMessage);
+
+  // Fade in the message
+  setTimeout(() => curseMessage.style.opacity = "1", 10);
+
+  // Fade out the message after 3 seconds
+  setTimeout(() => curseMessage.style.opacity = "0", 3000);
+
+  // Remove the message after it fades out
+  setTimeout(() => curseMessage.remove(), 3500);
+
+  // Start decrementing the score
+  if (!curseInterval) {
+    curseInterval = setInterval(() => {
+      score -= 50000; // Decrease score
+      const scoreElement = document.getElementById('score'); // Update score display
+      if (scoreElement) {
+        scoreElement.textContent = "Score: " + score;
+      }
+    }, 10); // Every 10 milliseconds
+  }
+
+  // Stop the curse after 3 seconds
+  setTimeout(() => {
+    clearInterval(curseInterval);
+    curseInterval = null; // Reset the curse interval
+  }, 3000);
 }
 
-// Flag to make sure the audio only plays once
-let devToolsOpened = false;
-
-// Set an interval to regularly check if dev tools are open
-setInterval(() => {
-  if (document.readyState === "complete") {
-    if (isDevToolsOpen() && !devToolsOpened) {
-      devToolsOpened = true;  // Dev tools were opened
-      playAlertAudio();  // Play the alert sound
-    } else if (!isDevToolsOpen() && devToolsOpened) {
-      devToolsOpened = false;  // Dev tools were closed
-    }
-  }
-}, 1000); // Check every second
+//new styff
