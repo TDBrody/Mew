@@ -276,77 +276,7 @@ document.getElementById('popup4-close').onclick = function () {
 document.getElementById('popup5-close').onclick = function () {
   document.getElementById('popup5').style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
-}; let isActive = false;
-let cooldown = false;
-
-// Function to create particles
-function createRainbowSpeedLine() {
-  const particle = document.createElement('div');
-  particle.classList.add('speed-particle');
-
-  // Randomize position within the rectangle
-  const rect = document.getElementById('rainbow-rectangle').getBoundingClientRect();
-  const x = Math.random() * rect.width;
-  const y = Math.random() * rect.height;
-
-  particle.style.left = `${rect.left + x}px`;
-  particle.style.top = `${rect.top + y}px`;
-  document.body.appendChild(particle);
-
-  // Remove the particle after animation ends
-  particle.addEventListener('animationend', () => particle.remove());
-}
-
-// Main function to handle the event
-function triggerRainbowEvent() {
-  if (isActive || cooldown) return; // Prevent duplicate triggers
-
-  const rainbowRectangle = document.getElementById('rainbow-rectangle');
-  const donutImage = document.getElementById('donut-image');
-
-  // Activate the event
-  isActive = true;
-  cooldown = true;
-
-  // Show rectangle with animation
-  rainbowRectangle.style.display = 'block';
-  rainbowRectangle.style.animation = 'growRectangle 1s ease-out forwards, rainbowShift 3s linear infinite';
-
-  // Start particle animation
-  const particleInterval = setInterval(createRainbowSpeedLine, 100);
-
-  // Show the donut after 1 second
-  setTimeout(() => {
-    donutImage.style.display = 'block';
-    donutImage.style.animation = 'donutAppear 1s ease-out forwards';
-
-    // After 1 second, hide the donut and start clean-up
-    setTimeout(() => {
-      score += 500000; // Increment score
-      console.log(`Score: ${score}`);
-
-      // Hide the donut
-      donutImage.style.animation = 'donutFadeOut 1s ease-out forwards';
-      donutImage.addEventListener('animationend', () => {
-        donutImage.style.display = 'none';
-      });
-
-      // Shrink and hide the rectangle
-      rainbowRectangle.style.animation = 'shrinkRectangle 1s ease-in forwards';
-      setTimeout(() => {
-        rainbowRectangle.style.display = 'none';
-        clearInterval(particleInterval); // Stop particles
-        isActive = false; // Reset active state
-
-        // Start cooldown timer
-        setTimeout(() => {
-          cooldown = false;
-        }, 10000); // 10-second cooldown
-      }, 1000); // Match shrinkRectangle duration
-    }, 1000); // Donut visibility duration
-  }, 1000); // Delay before donut appears
-}
-
+};
 const alertAudio = document.getElementById('alertAudio');
 
 // Function to detect when dev tools are open
@@ -436,3 +366,198 @@ function activateCurse() {
 }
 
 //new styff
+// Function to generate the additional message based on the current score
+function generateAdditionalMessage(score) {
+
+  if (score < 0) {
+    return "You are in the negatives lol omg.";
+  } else if (score < 1) {
+    return "You can do this! I will cheer you on!";
+  } else if (score < 10) {
+    return "You can't do this! I will not cheer you on!";
+  } else if (score < 20) {
+    return "Unrelated question, which show is better, outer banks or stranger things. just kidding I don't care about your opinion... ... although stranger things is better only a little in my humble opinoion";
+  } else if (score < 100) {
+    return "Hurry it up buckaroo before you get into the negitives.";
+  } else if (score < 1_000) {
+    return "Buddy chum pal friend amigo bud please... PLEASE... PLEEEEAAAASE get better at this game.";
+  } else if (score < 20_000) {
+    return "Pro tip... click the cat... not that cat though, the other cat.";
+  } else if (score < 50_000) {
+    return "You'll get there I believe in you... not very much but I do.";
+  } else if (score < 80_000) {
+    return "You suck at this game! Sorry, I couldn't think of something more creative to say.";
+  } else if (score < 100_000) {
+    return "This is actually embarrasing, get better right now.";
+  } else if (score < 120_000) {
+    return "It's futile... NOT EVEN CLOSE! GET BETTER!";
+  } else if (score < 150_000) {
+    return "Who let you cook. Never cook again.";
+  } else if (score < 180_000) {
+    return "You suck. Quit the game. Go play something else.";
+  } else if (score < 200_000) {
+    return "Pick up the pace, jesus christ you are slow, good luck winning at this pace!";
+  } else if (score < 300_000) {
+    return "You're actually getting a little bit better. By the way, Rowl";
+  } else if (score < 400_000) {
+    return "Get a life.";
+  } else if (score < 450_000) {
+    return "Press control shift w to get more points.";
+  } else if (score < 500_000) {
+    return "Which is better, cats or dogs... ... just kidding I don't care.";
+  } else if (score < 600_000) {
+    return "You are getting better at... at... at... wait what is the name of this game again?";
+  } else if (score < 700_000) {
+    return "This is good progress, except not really, because it isn't";
+  } else if (score < 800_000) {
+    return "Can you try a little bit harder please, you could litteraly train a goldfish to be better at this game than you are. HAHAHAH";
+  } else if (score < 900_000) {
+    return "It was a slow start, but you're getting there.";
+  } else if (score < 1_000_000) {
+    return "You got past one million, ";
+  } else if (score < 2_000_000) {
+    return "Wowza you are awful at this game. Get good, bud.";
+  } else if (score < 10_000_000) {
+    return "Ok, you're not as bad, but you still suck. Keep it up.";
+  } else if (score < 30_000_000) {
+    return "This is actually good, not gonna lie. At this rate, you might really win.";
+  } else if (score < 32_000_000) {
+    return "What's the name of that song that goes... lah lah lah lah LAH LAAAAH LAH LAh!";
+  } else if (score < 40_000_000) {
+    return "Nice you are almost half way there... what are you doing with your life though";
+  } else if (score < 50_000_000) {
+    return "Trip on a rock... I mean... nice job.";
+  } else if (score < 60_000_000) {
+    return "Ok job. That's all you get.";
+  } else {
+    return "Nice job!";
+  }
+}
+
+// Function to read out the score
+function readScore(score) {
+  if ('speechSynthesis' in window) {
+    const pointsToWin = 100_000_000 - score;
+    let messageText = `You have ${score} points! You are only ${pointsToWin} points away from winning.`;
+
+    // Append the additional message
+    messageText += ` ${generateAdditionalMessage(score)}`;
+
+    const message = new SpeechSynthesisUtterance(messageText);
+    message.pitch = 1;
+    message.rate = 1;
+    message.volume = 1;
+
+    window.speechSynthesis.speak(message);
+  }
+}
+
+// Function to start reading the score every 20 seconds
+function startScoreReader(getScoreCallback) {
+  if (!('speechSynthesis' in window)) {
+    // Exit if speech synthesis is not supported
+    return;
+  }
+
+  setInterval(() => {
+    const currentScore = getScoreCallback(); // Get the current score from the provided callback
+    readScore(currentScore);
+  }, 20000); // 20,000 ms = 20 seconds
+}
+
+// Example usage:
+
+// Replace this with your actual score retrieval logic
+
+
+// Function to retrieve the current score
+const getScore = () => score;
+
+// Simulate score updates for testing (remove in production)
+
+
+// Start the score reader
+startScoreReader(getScore);
+let isActive = false;
+let cooldown = false;
+
+// Function to create particles
+function createRainbowSpeedLine() {
+    const particle = document.createElement('div');
+    particle.classList.add('speed-particle');
+
+    // Randomize position within the rectangle
+    const rect = document.getElementById('rainbow-rectangle').getBoundingClientRect();
+    const x = Math.random() * rect.width;
+    const y = Math.random() * rect.height;
+
+    particle.style.left = `${rect.left + x}px`;
+    particle.style.top = `${rect.top + y}px`;
+    document.body.appendChild(particle);
+
+    // Remove the particle after animation ends
+    particle.addEventListener('animationend', () => particle.remove());
+}
+
+// Main function to handle the event
+function triggerRainbowEvent() {
+    if (isActive || cooldown) return; // Prevent duplicate triggers
+
+    const rainbowRectangle = document.getElementById('rainbow-rectangle');
+    const donutImage = document.getElementById('donut-image');
+
+    // Activate the event
+    isActive = true;
+    cooldown = true;
+
+    // Show rectangle with animation
+    rainbowRectangle.style.display = 'block';
+    rainbowRectangle.style.animation = 'growRectangle 1s ease-out forwards, rainbowShift 3s linear infinite';
+
+    // Start particle animation
+    const particleInterval = setInterval(createRainbowSpeedLine, 100);
+
+    // Show the donut after 1 second
+    setTimeout(() => {
+        donutImage.style.display = 'block';
+        donutImage.style.animation = 'donutAppear 1s ease-out forwards';
+
+        // After 1 second, hide the donut and start clean-up
+        setTimeout(() => {
+            score += 5000000; // Increment score
+            console.log(`Score: ${score}`);
+
+            // Hide the donut
+            donutImage.style.animation = 'donutFadeOut 1s ease-out forwards';
+            donutImage.addEventListener('animationend', () => {
+                donutImage.style.display = 'none';
+            });
+
+            // Shrink and hide the rectangle
+            rainbowRectangle.style.animation = 'shrinkRectangle 1s ease-in forwards';
+            setTimeout(() => {
+                rainbowRectangle.style.display = 'none';
+                clearInterval(particleInterval); // Stop particles
+                isActive = false; // Reset active state
+
+                // Start cooldown timer
+                setTimeout(() => {
+                    cooldown = false;
+                }, 10000); // 10-second cooldown
+            }, 1000); // Match shrinkRectangle duration
+        }, 1000); // Donut visibility duration
+    }, 1000); // Delay before donut appears
+}
+
+// Probability-based event triggering logic (1/60 chance per second)
+function attemptTriggerRainbowEvent() {
+    if (Math.random() < 1 / 60) { // 1/60 chance to trigger
+        triggerRainbowEvent();
+    }
+}
+
+// Example trigger loop running every second
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(attemptTriggerRainbowEvent, 1000); // Check once per second
+});
+
